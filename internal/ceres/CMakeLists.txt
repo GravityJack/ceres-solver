@@ -234,7 +234,10 @@ else()
   # for downstream clients.
   set(REQUIRED_PUBLIC_CXX_FEATURES cxx_std_${CMAKE_CXX_STANDARD})
 endif()
-target_compile_features(ceres PUBLIC ${REQUIRED_PUBLIC_CXX_FEATURES})
+# Workaround error using Xcode generator
+if (NOT IOS)
+  target_compile_features(ceres PUBLIC ${REQUIRED_PUBLIC_CXX_FEATURES})
+endif()
 
 include(AppendTargetProperty)
 # Always build position-independent code (PIC), even when building Ceres as a

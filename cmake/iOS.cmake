@@ -237,6 +237,18 @@ set(CMAKE_C_OSX_CURRENT_VERSION_FLAG "-current_version ")
 set(CMAKE_CXX_OSX_COMPATIBILITY_VERSION_FLAG "${CMAKE_C_OSX_COMPATIBILITY_VERSION_FLAG}")
 set(CMAKE_CXX_OSX_CURRENT_VERSION_FLAG "${CMAKE_C_OSX_CURRENT_VERSION_FLAG}")
 
+# Skip building test program.
+# (See https://code.google.com/archive/p/ios-cmake/issues/1)
+set(CMAKE_C_COMPILER_WORKS TRUE)
+set(CMAKE_CXX_COMPILER_WORKS TRUE)
+
+# Fix missing Threads package
+# (See https://stackoverflow.com/questions/14171740/cmake-with-ios-toolchain-cant-find-threads)
+set(CMAKE_THREAD_LIBS_INIT "-lpthread")
+set(CMAKE_HAVE_THREADS_LIBRARY 1)
+set(CMAKE_USE_WIN32_THREADS_INIT 0)
+set(CMAKE_USE_PTHREADS_INIT 1)
+
 # Note that only Xcode 7+ supports the newer more specific:
 # -m${XCODE_IOS_PLATFORM}-version-min flags, older versions of Xcode use:
 # -m(ios/ios-simulator)-version-min instead.
